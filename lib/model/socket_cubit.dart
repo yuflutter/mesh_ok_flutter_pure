@@ -46,7 +46,7 @@ class SocketCubit extends Cubit<SocketState> {
         },
         receiveString: (msg) async {
           logger.info('received string: "$msg"');
-          emit(state..messages.add(TextMessage(msg)));
+          emit(state.copyWith()..messages.add(TextMessage(msg)));
         },
         transferUpdate: (transfer) {
           // transfer.count is the amount of bytes transfered
