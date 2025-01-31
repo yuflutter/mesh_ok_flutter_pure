@@ -1,6 +1,6 @@
-# mesh_ok
+# Mesh.OK
 
-Text chat of two android devices via wifi-direct. Written in flutter using flutter_p2p_connection plugin.
+Text chat between two Android devices via wifi-direct. Written in flutter using the flutter_p2p_connection plugin. Made for research purposes.
 
 ## TODO
 
