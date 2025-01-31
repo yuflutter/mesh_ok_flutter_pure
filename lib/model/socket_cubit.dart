@@ -97,7 +97,7 @@ class SocketCubit extends Cubit<SocketState> {
         },
         receiveString: (msg) async {
           logger.info('received string: "$msg"');
-          emit(state.copyWith()..messages.add(TextMessage(msg, isMy: true)));
+          emit(state.copyWith()..messages.add(TextMessage(msg)));
         },
         onCloseSocket: () {
           logger.info("socket closed");

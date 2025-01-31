@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/core/logger_widget.dart';
-import '/core/theme_elements.dart';
 import '/model/p2p_connector_cubit.dart';
 import '/model/p2p_connector_state.dart';
 import '/model/socket_cubit.dart';
 import '/model/socket_state.dart';
+import 'my_status_panel.dart';
 
 class ChatPage extends StatefulWidget {
   final SocketCubit socketCubit;
@@ -30,13 +30,17 @@ class _ChatPageState extends State<ChatPage> {
             builder: (context, socket) {
               return Scaffold(
                 appBar: AppBar(
-                  title: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(connector.p2pGroupInfo?.groupNetworkName ?? 'groupNetworkName???'),
-                      Text(connector.p2pInfo?.groupOwnerAddress ?? 'groupOwnerAddress???', style: headerTextStyle),
-                    ],
+                  title: DefaultTextStyle(
+                    style: TextStyle(),
+                    child: MyStatusPanel(forAppBar: true),
                   ),
+                  // title: Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                  //   children: [
+                  //     Text(connector.p2pGroupInfo?.groupNetworkName ?? 'groupNetworkName???'),
+                  //     Text(connector.p2pInfo?.groupOwnerAddress ?? 'groupOwnerAddress???', style: headerTextStyle),
+                  //   ],
+                  // ),
                 ),
                 body: SafeArea(
                   child: Padding(
@@ -44,11 +48,6 @@ class _ChatPageState extends State<ChatPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        TextFormField(
-                          controller: _msgController,
-                          autofocus: true,
-                          onFieldSubmitted: _senfMessage,
-                        ),
                         Expanded(
                           flex: 2,
                           child: ListView(
@@ -64,7 +63,13 @@ class _ChatPageState extends State<ChatPage> {
                             ],
                           ),
                         ),
-                        Expanded(child: LoggerWidget()),
+                        TextFormField(
+                          controller: _msgController,
+                          autofocus: true,
+                          onFieldSubmitted: _senfMessage,
+                        ),
+                        SizedBox(height: 8),
+                        if (MediaQuery.of(context).viewInsets.bottom == 0) Expanded(child: LoggerWidget()),
                       ],
                     ),
                   ),

@@ -9,9 +9,9 @@ import '/core/logger_widget.dart';
 import '/core/simple_future_builder.dart';
 import '/model/p2p_connector_cubit.dart';
 import '/model/p2p_connector_state.dart';
-import '/view/my_status_panel.dart';
-import '/view/peer_tile.dart';
-import '/view/chat_page.dart';
+import 'my_status_panel.dart';
+import 'peer_tile.dart';
+import 'chat_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -106,9 +106,11 @@ class _HomePageState extends State<HomePage> {
 
   // Ставим задержку для улучшения пользовательского опыта ))
   void _refresh() {
-    _refreshFuture = () async {
-      await context.read<P2pConnectorCubit>().refreshAll();
-      await Future.delayed(Duration(seconds: 1));
-    }();
+    setState(() {
+      _refreshFuture = () async {
+        await context.read<P2pConnectorCubit>().refreshAll();
+        await Future.delayed(Duration(seconds: 1));
+      }();
+    });
   }
 }

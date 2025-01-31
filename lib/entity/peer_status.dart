@@ -6,9 +6,9 @@ class PeerStatus {
 
   const PeerStatus._(this.id, this.caption);
 
-  static const available = PeerStatus._(3, 'Доступно');
-  static const invited = PeerStatus._(1, 'Приглашено');
-  static const connected = PeerStatus._(0, 'Подключено');
+  static const available = PeerStatus._(3, 'available');
+  static const invited = PeerStatus._(1, 'invited');
+  static const connected = PeerStatus._(0, 'connected');
 
   factory PeerStatus.fromId(int id) => switch (id) {
         3 => available,

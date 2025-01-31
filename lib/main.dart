@@ -5,9 +5,9 @@ import '/app_config.dart';
 import '/core/global.dart';
 import '/core/logger.dart';
 import '/core/strong_error_widget.dart';
-import 'data/p2p_info_repository.dart';
-import 'model/p2p_connector_cubit.dart';
-import 'view/home_page.dart';
+import '/data/p2p_info_repository.dart';
+import '/model/p2p_connector_cubit.dart';
+import '/view/home_page.dart';
 
 void main() {
   // Глобальные инстансы инжектим в Global, остальные - в BuildContext.

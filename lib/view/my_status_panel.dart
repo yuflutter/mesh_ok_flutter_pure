@@ -8,7 +8,9 @@ import '/model/p2p_connector_cubit.dart';
 import '/model/p2p_connector_state.dart';
 
 class MyStatusPanel extends StatelessWidget {
-  const MyStatusPanel({super.key});
+  final bool forAppBar;
+
+  const MyStatusPanel({super.key, this.forAppBar = false});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class MyStatusPanel extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('My status:', style: headerTextStyle),
+            if (!forAppBar) Text('My status:', style: headerTextStyle),
             Padding(
               padding: EdgeInsets.fromLTRB(15, 0, 5, 10),
               child: (p2pInfo != null && p2pInfo.groupOwnerAddress.isNotEmpty)
