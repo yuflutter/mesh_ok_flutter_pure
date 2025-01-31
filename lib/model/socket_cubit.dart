@@ -50,12 +50,12 @@ class SocketCubit extends Cubit<SocketState> {
         },
         transferUpdate: (transfer) {
           // transfer.count is the amount of bytes transfered
-          // transfer.total is the file size in bytes          emit(state.copyWith(status: P2pSocketStatus.connected));
-
-          // if transfer.receiving is true, you are receiving the file, else you're sending the file.
+          // transfer.total is the file size in bytes
+          // if transfer.receiving is true, you are receivin the file, else you're sending the file.
           // call `transfer.cancelToken?.cancel()` to cancel transfer. This method is only applicable to receiving transfers.
           logger.info(
-              "ID: ${transfer.id}, FILENAME: ${transfer.filename}, PATH: ${transfer.path}, COUNT: ${transfer.count}, TOTAL: ${transfer.total}, COMPLETED: ${transfer.completed}, FAILED: ${transfer.failed}, RECEIVING: ${transfer.receiving}");
+            "ID: ${transfer.id}, FILENAME: ${transfer.filename}, PATH: ${transfer.path}, COUNT: ${transfer.count}, TOTAL: ${transfer.total}, COMPLETED: ${transfer.completed}, FAILED: ${transfer.failed}, RECEIVING: ${transfer.receiving}",
+          );
         },
         onCloseSocket: () {
           logger.info("socket closed");
@@ -76,9 +76,7 @@ class SocketCubit extends Cubit<SocketState> {
       'connectToSocket(${p2pInfo.groupOwnerAddress})',
       () => _conn.connectToSocket(
         groupOwnerAddress: p2pInfo.groupOwnerAddress,
-        // downloadPath is the directory where received file will be stored
         downloadPath: "/storage/emulated/0/Download/",
-        // the max number of downloads at a time. Default is 2.
         maxConcurrentDownloads: 2,
         // delete incomplete transfered file
         deleteOnError: true,
@@ -93,7 +91,8 @@ class SocketCubit extends Cubit<SocketState> {
           // if transfer.receiving is true, you are receiving the file, else you're sending the file.
           // call `transfer.cancelToken?.cancel()` to cancel transfer. This method is only applicable to receiving transfers.
           logger.info(
-              "ID: ${transfer.id}, FILENAME: ${transfer.filename}, PATH: ${transfer.path}, COUNT: ${transfer.count}, TOTAL: ${transfer.total}, COMPLETED: ${transfer.completed}, FAILED: ${transfer.failed}, RECEIVING: ${transfer.receiving}");
+            "ID: ${transfer.id}, FILENAME: ${transfer.filename}, PATH: ${transfer.path}, COUNT: ${transfer.count}, TOTAL: ${transfer.total}, COMPLETED: ${transfer.completed}, FAILED: ${transfer.failed}, RECEIVING: ${transfer.receiving}",
+          );
         },
         receiveString: (msg) async {
           logger.info('received string: "$msg"');
@@ -116,9 +115,10 @@ class SocketCubit extends Cubit<SocketState> {
 
   @override
   Future<void> close() {
-    // TODO: Это не работает, переделать
+    // TODO: Это не работает, переделать полностью
     _conn.closeSocket();
     _socketStatusController.add(SocketStatus.notConnected);
+    _socketStatusController.close();
     return super.close();
   }
 }

@@ -32,7 +32,7 @@ class P2pConnectorCubit extends Cubit<P2pConnectorState> with WidgetsBindingObse
       await repository.init();
       emit(state.copyWith(p2pInfo: repository.getP2pInfo()));
 
-      await dowl('Permission.location.reqp2pInfouest()', Permission.location.request);
+      await dowl('Permission.location.request()', Permission.location.request);
       // Почему-то это не срабатывает, но как оказалось - и не нужно.
       // await dowl('Permission.nearbyWifiDevices.request()', Permission.nearbyWifiDevices.request);
       // await dowl('askConnectionPermissions()', _conn.askConnectionPermissions);
@@ -44,7 +44,7 @@ class P2pConnectorCubit extends Cubit<P2pConnectorState> with WidgetsBindingObse
         await dowl('enableLocationServices()', _conn.enableLocationServices);
       }
 
-      // TODO: Вставить проверку, что всёp2pInfo разрешено и включено, и кинуть userError
+      // TODO: Вставить проверку, что всё разрешено и включено, или кинуть userError
 
       await dowl('initialize()', _conn.initialize);
       await dowl('register()', _conn.register);

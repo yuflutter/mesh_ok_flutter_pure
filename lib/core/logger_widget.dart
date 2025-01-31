@@ -11,21 +11,22 @@ class LoggerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final logger = global<Logger>();
     return ListenableBuilder(
-        listenable: logger,
-        builder: (context, _) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text('Last logs:', style: headerTextStyle),
-              Expanded(
-                child: ListView(
-                  children: [
-                    ...logger.lastLogs(dateFormat: 'mm:ss').map((e) => SelectableText(e)),
-                  ],
-                ),
+      listenable: logger,
+      builder: (context, _) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text('Last logs:', style: headerTextStyle),
+            Expanded(
+              child: ListView(
+                children: [
+                  ...logger.lastLogs(dateFormat: 'mm:ss').map((e) => SelectableText(e)),
+                ],
               ),
-            ],
-          );
-        });
+            ),
+          ],
+        );
+      },
+    );
   }
 }

@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_p2p_connection/flutter_p2p_connection.dart';
 
 class P2pInfoRepository {
-  late SharedPreferences _db;
+  late final SharedPreferences _db;
 
   Future<void> init() async {
     _db = await SharedPreferences.getInstance();
