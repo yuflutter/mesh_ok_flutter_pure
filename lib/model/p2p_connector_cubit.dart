@@ -28,9 +28,9 @@ class P2pConnectorCubit extends Cubit<P2pConnectorState> with WidgetsBindingObse
     final logger = global<Logger>();
     try {
       // Нет способа получить из сети текущее состояние p2p, поэтому сохраняем его локально,
-      // и поднимаем при старте приложения.
+      // и восстанавливаем при старте приложения.
       await repository.init();
-      emit(state.copyWith(p2pInfo: repository.getP2pInfo()));
+      emit(state.copyWith(p2pInfo: repository.restoreP2pInfo()));
 
       await dowl('Permission.location.request()', Permission.location.request);
       // Почему-то это не срабатывает, но как оказалось - и не нужно.
@@ -113,13 +113,12 @@ class P2pConnectorCubit extends Cubit<P2pConnectorState> with WidgetsBindingObse
     try {
       logger.info(p2pInfo.toJson());
       emit(state.copyWith(p2pInfo: p2pInfo));
-      // Сохраняем для следующего запуска приложения
-      repository.setP2pInfo(p2pInfo);
 
       if (state.p2pInfo?.isConnected == true) {
         tryToOpenSocket();
       }
 
+      await repository.saveP2pInfo(p2pInfo); // сохраняем для следующего запуска
       _discoverPeers(); // андроид прекратил поиск пиров, возобновляем
     } catch (e, s) {
       logger.error('$runtimeType', e, s);

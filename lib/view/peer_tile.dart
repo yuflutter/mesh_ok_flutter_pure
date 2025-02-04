@@ -21,7 +21,7 @@ class PeerTile extends StatelessWidget {
           offset: Offset(MediaQuery.of(context).size.width, -25),
           itemBuilder: (context) => [
             PopupMenuItem(
-              enabled: (p2pInfo?.isConnected != true),
+              // enabled: (p2pInfo?.isConnected != true),
               onTap: () => _connectToPeer(context, peer),
               child: Text('Connect to peer'),
             ),
