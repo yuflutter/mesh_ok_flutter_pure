@@ -13,7 +13,7 @@ import '/entity/socket_status.dart';
 import '/data/p2p_info_repository.dart';
 import 'p2p_connector_state.dart';
 import 'socket_cubit.dart';
-import 'dowl.dart';
+import 'etc/dowl.dart';
 
 class P2pConnectorCubit extends Cubit<P2pConnectorState> with WidgetsBindingObserver {
   final P2pInfoRepository repository;

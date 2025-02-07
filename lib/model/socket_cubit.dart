@@ -7,7 +7,7 @@ import '/core/logger.dart';
 import '/entity/p2p_info.dart';
 import '/entity/socket_status.dart';
 import '/entity/text_message.dart';
-import 'dowl.dart';
+import 'etc/dowl.dart';
 import 'socket_state.dart';
 
 class SocketCubit extends Cubit<SocketState> {
@@ -109,7 +109,7 @@ class SocketCubit extends Cubit<SocketState> {
   }
 
   void sendMessage(String msg) {
-    dowls('sendStringToSocket()', () => _conn.sendStringToSocket(msg));
+    dowl('sendStringToSocket()', () => _conn.sendStringToSocket(msg));
     emit(state.copyWith()..messages.add(TextMessage(msg, isMy: true)));
   }
 
