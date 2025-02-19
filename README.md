@@ -11,7 +11,3 @@ Problems that need fixing:
 4) It is not clear how to accept incoming connection requests from another group if the current group is active.
 PS
 Probably, the flutter_p2p_connection plugin is not suitable for use in production, and you need to use the native Android API.
-
-## license
-
-Can be used in term papers and test assignments. A link to the author is desirable. )))
